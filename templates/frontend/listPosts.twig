@@ -1,0 +1,74 @@
+{% extends '/frontend/layout.twig' %}
+
+{% block content %}
+	<section id="articles">
+		<div class="album py-5 bg-light">
+			<div class="container">
+				<div class="row">
+					{% for data in post %}
+						{% if data is empty %}
+							<h1>Il n'y a pas de billet à afficher!</h1>
+						{% else %}
+							<div class="col-md-4">
+								<div class="card mb-4 shadow-sm">
+									<div class="card-body">
+										{% if data.image_post is null %}
+											<div class="bd-placeholder-img card-img-top img-post"></div>
+										{% else %}
+											<figure class="figure">
+												<img src="images/backend/{{ data.image_post }}" class="bd-placeholder-img card-img-top">
+												<figcaption class="figure-caption">{{ data.image_caption}}</figcaption>
+											</figure>
+										{% endif %}
+										<h2>{{ data.title }}</h2>
+										<p class="card-text">
+											<time datetime="{{ data.creation_date }}">{{ data.formatted_date }}</time>
+										</p>
+										<p>{{ data.content | striptags | raw }}</p>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<button onclick="window.location.href = 'index.php?action=post&amp;id={{ data.id }}'" type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
+												<button onclick="window.location.href = 'index.php?action=post&amp;id={{ data.id }}'" type="button" class="btn btn-sm btn-outline-secondary">Commentaires</button>
+											</div>
+											<small class="text-muted">{{ data.author }}</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+
+				</div>
+			</div>
+			<!--end Posts -->
+
+			<!-- Paging -->
+			<div id="paging">
+				{% if page > number_of_pages %}
+					<a href="index.php?action=listPosts&amp;page=1"></a>
+				{% else %}
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<li class="page-item">
+								{% if page > 1 %}
+									<a href="index.php?action=listPosts&amp;page={{ page - 1 }}" class="page-link">&laquo; Précédent</a>
+								{% endif %}
+							</li>
+							{% for key in 1..number_of_pages %}
+								<li class="page-item">
+									<a href="index.php?action=listPosts&amp;page={{ key }}" class="page-link">{{ key }}</a>
+								</li>
+							{% endfor %}
+							<li class=" page-item">
+								{% if page < number_of_pages %}
+									<a href="index.php?action=listPosts&amp;page={{ page + 1 }}" class="page-link">Suivant &raquo;</a>
+								{% endif %}
+							</li>
+						</ul>
+					</nav>
+				{% endif %}
+			</div>
+			<!-- end paging -->
+		</div>
+	</section>
+{% endblock %}

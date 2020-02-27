@@ -1,0 +1,39 @@
+{% extends '/backend/layout.twig' %}
+{% block content %}
+  <form id="tinymceForm" action="index.php?action=addPost" method="post" enctype="multipart/form-data">
+    <div class="col-md-12 mb-3">
+      <label for="tinymceTitle">Titre du billet</label>
+      <input type="text" class="form-control" name="tinymceTitle" id="tinymceTitle" placeholder="" value="" required="required">
+      <div class="invalid-feedback">
+        Veuillez saisir un titre pour ce billet.
+      </div>
+      <label for="tinymceContent">Contenu du billet</label>
+      <textarea id="tinymceContent" name="tinymceContent"></textarea>
+
+      {# Upload file #}
+      <div class="form-group">
+        <div class="col-md-7">
+          <h2>Ajout d'une image</h2>
+          <p>Ajoutez une image à votre article. Une seule image par article:</p>
+          <p>Fichier à ajouter:</p>
+          <div class="custom-file mb-3">
+            <div class="col-md-7">
+              <input type="file" class="custom-file-input" name="submitFileToUpload" id="customFile">
+              <label class="custom-file-label" for="customFile">Choisir une image</label>
+              <label for="imageCaption">Légende</label>
+              <textarea class="form-control" name="imageCaption" row="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-3">
+        <button type="submit" class="btn btn-primary mb-2">Envoyer</button>
+        <button type="reset" class="btn btn-primary mb-2">Effacer</button>
+        <a class="nav-link" href="index.php?action=createPost">
+          Retour
+        </a>
+      </div>
+    </div>
+  </form>
+
+{% endblock %}

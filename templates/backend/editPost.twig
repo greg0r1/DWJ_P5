@@ -1,0 +1,43 @@
+{% extends '/backend/layout.twig' %}
+
+{% block content %}
+  <h4 class="mb-3">Commentaire n°{{ post['id'] }}
+    de
+    <strong>{{ post['author'] }}</strong>
+  </h4>
+  <form id="tinymceForm" action="index.php?action=updatePost&amp;idPost={{ post['id'] }}" method="post" enctype="multipart/form-data">
+    <div class="col-md-12 mb-3">
+      <label for="tinymceTitle">Titre du billet</label>
+      <input type="text" class="form-control" name="tinymceTitle" id="tinymceTitle" placeholder="" value="{{ post['title'] }}" required="required">
+      <div class="invalid-feedback">
+        Veuillez saisir un titre pour ce billet.
+      </div>
+      <textarea id="tinymceContent" name="tinymceContent">
+        {{ post['content'] }}
+      </textarea>
+
+      {# Upload file #}
+      <div class="form-group">
+        <div class="col-md-7">
+          <h2>Modification de l'image</h2>
+          <p>Ajoutez une image à votre article. Une seule image par article:</p>
+          <p>Fichier à ajouter:</p>
+          <div class="custom-file mb-3">
+            <div class="col-md-7">
+              <input type="file" class="custom-file-input" name="submitFileToUpload" id="customFile">
+              <label class="custom-file-label" for="customFile">Choisir une image</label>
+              <img src="images/backend/{{ figCaption['image_post'] }}" alt="{{ figCaption['image_post'] }}" style="width:100%">
+              <label for="imageCaption">Modifier la légende de l'image</label>
+              <textarea class="form-control" name="imageCaption" row="2">{{ figCaption['image_caption'] }}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Modifier</button>
+    <a href="index.php?action=updatePost" type="button" class="btn btn-primary mb-2">Effacer</a>
+    <a class="nav-link" href="index.php?action=adminListPosts">
+      Retour
+    </a>
+  </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends '/frontend/layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+  <script src="../public/js/api/popularMovies.js"></script>
+{% endblock %}
+
+{% block content %}
+  <section id="articles">
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row"></div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

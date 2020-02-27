@@ -1,0 +1,99 @@
+{% extends '/frontend/layout.twig' %}
+{% block head %}
+	{{ parent()}}
+	<script src="../public/js/api/homePage.js"></script>
+	<!-- Add icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+
+{% block carousel %}
+	<!-- Carousel -->
+	<div id="carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="bd-placeholder-img"></div>
+					<div class="container">
+						<div class="carousel-caption text-left">
+							<h1></h1>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="bd-placeholder-img"></div>
+					<div class="container">
+						<div class="carousel-caption text-left">
+							<h1></h1>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="bd-placeholder-img"></div>
+					<div class="container">
+						<div class="carousel-caption text-left">
+							<h1></h1>
+							<p></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	<!--end Carousel -->
+{% endblock %}
+
+{% block content %}
+
+	<section id="popularMovies-Card">
+		<h4 class="home-sections-h4">Films populaires</h4>
+		<div class="container">
+			<div class="row">
+				<div class="card-deck"></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="releasedMovies-Card">
+		<h4 class="home-sections-h4">Films sortis en salle</h4>
+		<div class="container">
+			<div class="row">
+				<div class="card-deck"></div>
+			</div>
+		</div>
+	</section>
+
+	<section id="topRatedMovies-Card">
+		<h4 class="home-sections-h4">Films les mieux notés</h4>
+		<div class="container">
+			<div class="row">
+				<div class="card-deck"></div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{{ parent() }}
+	<!-- Latest compiled and minified CSS -->
+	<link
+	rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+{% endblock %}
