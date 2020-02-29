@@ -51,7 +51,7 @@
 						<ul class="pagination">
 							<li class="page-item">
 								{% if page > 1 %}
-									<a href="index.php?action=listPosts&amp;page={{ page - 1 }}" class="page-link">&laquo; Précédent</a>
+									<a href="index.php?action=listPosts&amp;page={{ page - 1 }}" class="page-link">&laquo;</a>
 								{% endif %}
 							</li>
 							{% for key in 1..number_of_pages %}
@@ -61,7 +61,7 @@
 							{% endfor %}
 							<li class=" page-item">
 								{% if page < number_of_pages %}
-									<a href="index.php?action=listPosts&amp;page={{ page + 1 }}" class="page-link">Suivant &raquo;</a>
+									<a href="index.php?action=listPosts&amp;page={{ page + 1 }}" class="page-link">&raquo;</a>
 								{% endif %}
 							</li>
 						</ul>

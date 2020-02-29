@@ -156,7 +156,7 @@ class PostManagerBo extends ManagerBo
                     $message = "Erreur inconnue";
                     break;
             }
-            throw new Exception($message);
+            echo '<script>alert("' . $message . '")</script>';
         }
     }
 }

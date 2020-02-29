@@ -321,21 +321,14 @@ input {
 
 #reportedCommentForm .btn-primary,
 #addComment .btn-primary {
-    background-color: #6c6c3f;
-    border-color: #5b5b32;
+    background-color: #c88100;
+    border-color: #b77806;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #2fa49e;
-    border-color: #2e9b96;
-}
-
-.btn-secondary {
-    color: #fff;
-    background-color: #3c6d75;
-    border-color: #33636a;
-    ;
+    background-color: #c88100;
+    border-color: #b77806;
 }
 
 .marketing h2 {
@@ -475,10 +468,37 @@ input {
     color: orange;
 }
 
+.jumbotron .container {
+    background-color: #00000045;
+    color: #fff;
+}
+
+.jumbotron .container h1,
+.jumbotron .container p {
+    color: #fff;
+}
+
+.jumbotron {
+    background-position: center !important;
+    background-size: 100% auto !important;
+    border-radius: unset !important;
+    margin-bottom: unset !important;
+}
+
+
 /* HomePage - Sections 1 */
 /* HomePage - Sections */
 
 /* Pages - API */
+section {
+    margin-top: 2em;
+}
+
+section a {
+    text-decoration: none;
+    color: #c88100;
+}
+
 .topRatedHeader {
     background-size: 100% auto;
     background-position: center;
@@ -491,6 +511,29 @@ input {
 }
 
 /* Pages - API */
+
+#btnTop {
+    width: 50px;
+    font-size: 20px;
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: rgba(53, 53, 53, 0.5);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    margin: auto;
+}
+
+#btnTop>p {
+    transform: rotate(90deg);
+    margin: 0;
+}
 
 /*-- footer --*/
 .footer {

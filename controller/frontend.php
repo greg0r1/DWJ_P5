@@ -51,6 +51,20 @@ function topRatedMovies()
     echo $twig->render('/frontend/topRatedMovies.twig', ['title' => 'Les films les mieux noté']);
 }
 
+function movie_view()
+{
+    $twig = loadTwig();
+
+    $title = $_GET['title'];
+    $date = $_GET['date'];
+    $overview = $_GET['overview'];
+    $image = $_GET['image'];
+    $date = $_GET['date'];
+    $vote_average = $_GET['vote_average'];
+
+    echo $twig->render('/frontend/movieView.twig', ['title' => $title, 'date' => $date, 'overview' => $overview, 'image' => $image, 'vote_average' => $vote_average]);
+}
+
 function post($postId)
 {
     $twig = loadTwig();

@@ -56,6 +56,8 @@ try {
             releasedMovies();
         } elseif ($_GET['action'] == 'topRatedMovies') {
             topRatedMovies();
+        } elseif ($_GET['action'] == 'movieView') {
+            movie_view();
         } elseif (($_GET['action'] == 'home') && ($_GET['logStatus'] == 'logOut')) {
             $_SESSION['first_name'] = $_SESSION[''];
             session_destroy();

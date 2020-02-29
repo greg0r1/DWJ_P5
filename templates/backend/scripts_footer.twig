@@ -1,0 +1,19 @@
+{% block scripts_footer %}
+  <!-- Bootstrap core JavaScript-->
+  <script src="../public/js/bootstrap.bundle.min.js"></script>
+  <script src="../public/js/style.js"></script>
+  <script src="../public/js/sb-admin-2.min.js"></script>
+
+  <script>
+    function resetField() {
+      $("#tinymce>p").textContent = "";
+    }
+
+    // Add the name of the file to appear on select file
+    $(".custom-file-input").on("change", function () {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  </script>
+
+{% endblock %}
