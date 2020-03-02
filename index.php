@@ -11,7 +11,7 @@ function loadTwig()
     $twig = new Twig\Environment(
         $loader,
         [
-            'cache' => false, //__DIR__ . '/tmp'
+            // 'cache' => __DIR__ . '/tmp',
             'debug' => true
         ]
     );
@@ -83,10 +83,19 @@ try {
             } elseif ($_GET['action'] == 'createPost') {
                 createPost();
             } elseif ($_GET['action'] == 'addPost') {
-                if (isset($_POST['tinymceTitle']) && isset($_POST['tinymceContent'])) {
-                    $_POST['tinymceTitle'] = strip_tags($_POST['tinymceTitle']);
-                    $_POST['tinymceContent'] = strip_tags($_POST['tinymceContent']);
-                    addPost();
+                if (!empty($_POST['tinymceTitle']) || !empty($_POST['tinymceContent'])) {
+                    $idPost = $_GET['idPost'];
+                    $title = $_POST['tinymceTitle'];
+                    $content = strip_tags($_POST['tinymceContent']);
+                    $image_post = $_FILES['submitFileToUpload']['name'];
+                    $author = $_SESSION['first_name'];
+                    if ($_FILES['submitFileToUpload']['error'] == 4) {
+                        $image_post = $_POST['image-post'];
+                    }
+                    $image_caption = $_POST['imageCaption'];
+                    addPost($title, $content, $author, $image_post, $image_caption);
+                } else {
+                    throw new Exception("Erreur de contenu. Les données du formulaire sont vides.", 1);
                 }
             } elseif ($_GET['action'] == 'adminListPosts') {
                 listPostsCRUD();
@@ -102,7 +111,12 @@ try {
                     $idPost = $_GET['idPost'];
                     $title = $_POST['tinymceTitle'];
                     $content = $_POST['tinymceContent'];
-                    updatePost($idPost, $title, $content);
+                    $image_post = $_FILES['submitFileToUpload']['name'];
+                    if ($_FILES['submitFileToUpload']['error'] == 4) {
+                        $image_post = $_POST['image-post'];
+                    }
+                    $image_caption = $_POST['imageCaption'];
+                    updatePost($idPost, $title, $content, $image_post, $image_caption);
                 } else {
                     throw new Exception("Erreur de contenu. Les données du formulaire sont vides.", 1);
                 }

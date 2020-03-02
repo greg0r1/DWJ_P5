@@ -29,12 +29,12 @@ function createPost()
     echo $twig->render('/backend/createPost.twig', ['title' => 'Création de post', 'session' => $_SESSION['first_name']]);
 }
 
-function addPost()
+function addPost($title, $content, $author, $image_post, $image_caption)
 {
     $twig = loadTwig();
 
     $postManager = new PostManagerBo();
-    $postManager->addNewPost();
+    $postManager->addNewPost($title, $content, $author, $image_post, $image_caption);
     $postManager->addImage();
 
     $name = $_SESSION['first_name'];
@@ -72,14 +72,14 @@ function editPost($postId)
     echo $twig->render('/backend/editPost.twig', ['post' => $post, 'figCaption' => $figCaption, 'title' => 'Modification du billet', 'session' => $_SESSION['first_name']]);
 }
 
-function updatePost($idPost, $title, $content)
+function updatePost($idPost, $title, $content, $image_post, $image_caption)
 {
     $twig = loadTwig();
 
     $postManager = new PostManagerBo();
 
-    $postManager->updatingPost($idPost, $title, $content);
     $postManager->addImage();
+    $postManager->updatingPost($idPost, $title, $content, $image_post, $image_caption);
     echo $twig->render('/backend/updatedPost.twig', ['idPost' => $idPost, 'addImageOk' => $postManager->_message_Ok, 'session' => $_SESSION['first_name']]);
 }
 

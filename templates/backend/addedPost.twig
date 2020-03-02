@@ -2,12 +2,14 @@
 
 {% block content %}
   <div class="container">
-    <h3>Votre billet a bien été ajouté
-      <strong>{{ name }}</strong>
-      <p>{{addImageOk}}</p>
-    </h3>
-    <a class="nav-link" href="index.php?action=adminListPosts">
-      Retour à la liste des billets
-    </a>
+    <div class="d-flex justify-content-center">
+      <h3>Votre billet a bien été ajouté
+        <strong>{{ name }}</strong>
+        <p>{{addImageOk}}</p>
+      </h3>
+      <a class="nav-link" href="index.php?action=adminListPosts">
+        Retour à la liste des billets
+      </a>
+    </div>
   </div>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
   <div class="container">
     <div class="col-md-8">
-      <h4 class="mb-3">Commentaire n°{{ post['id'] }}
+      <h4 class="mb-3">Article n°{{ post['id'] }}
         de
         <strong>{{ post['author'] }}</strong>
       </h4>
@@ -29,6 +29,7 @@
                   <input type="file" class="custom-file-input" name="submitFileToUpload" id="customFile">
                   <label class="custom-file-label" for="customFile">Choisir une image</label>
                   <img src="images/backend/{{ figCaption['image_post'] }}" alt="{{ figCaption['image_post'] }}" style="width:100%">
+                  <input type="hidden" name="image-post" value="{{ figCaption['image_post'] }}">
                   <label for="imageCaption">Modifier la légende de l'image</label>
                   <textarea class="form-control" name="imageCaption" row="2">{{ figCaption['image_caption'] }}</textarea>
                 </div>
@@ -39,7 +40,10 @@
         <button type="submit" class="btn btn-primary mb-2">Modifier</button>
         <a href="index.php?action=updatePost" type="button" class="btn btn-primary mb-2">Effacer</a>
         <a class="nav-link" href="index.php?action=adminListPosts">
-          Retour
+          Retour à la liste des articles
+        </a>
+        <a class="nav-link" href="index.php?action=commentsList">
+          Retour à la liste des commentaires
         </a>
       </form>
     </div>

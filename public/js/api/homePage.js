@@ -4,8 +4,10 @@ function popular_movies_getJSON() {
     let movies_S1 = element.results;
     for (var i = 0; i < 8; i++) {
       let title_S1 = movies_S1[i].title;
+      title_S1 = title_S1.replace(/\'/g, " ");
       let date_S1 = movies_S1[i].release_date;
       let overview_S1 = movies_S1[i].overview;
+      overview_S1 = overview_S1.replace(/\'/g, " ");
       let imageMovie_S1 = movies_S1[i].poster_path;
       let vote_average_S1 = movies_S1[i].vote_average;
       let backdrop_path_S1 = movies_S1[i].backdrop_path;
@@ -53,10 +55,12 @@ function released_movies_getJSON() {
     let movies_S2 = element.results;
     for (var i = 0; i < 8; i++) {
       let title_S2 = movies_S2[i].title;
+      title_S2 = title_S2.replace(/\'/g, " ");
       let date_S2 = movies_S2[i].release_date;
       let imageMovie_S2 = movies_S2[i].poster_path;
       let vote_average_S2 = movies_S2[i].vote_average;
       let overview_S2 = movies_S2[i].overview;
+      overview_S2 = overview_S2.replace(/\'/, " ");
       releasedMovies_Element(title_S2, date_S2, imageMovie_S2, vote_average_S2, overview_S2);
     }
   });
@@ -79,8 +83,10 @@ function top_rated_movies_getJSON() {
     let movies_S3 = element.results;
     for (var i = 0; i < 8; i++) {
       let title_S3 = movies_S3[i].title;
+      title_S3 = title_S3.replace(/\'/g, " ");
       let date_S3 = movies_S3[i].release_date;
       let overview_S3 = movies_S3[i].overview;
+      overview_S3 = overview_S3.replace(/\'/g, " ");
       let imageMovie_S3 = movies_S3[i].poster_path;
       let vote_average_S3 = movies_S3[i].vote_average;
       topRatedMovies_Element(title_S3, date_S3, imageMovie_S3, vote_average_S3, overview_S3);

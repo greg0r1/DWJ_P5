@@ -7,8 +7,9 @@
     <p class="mb-4">Ajoutez, suprimez, ou modifiez des articles.</p>
 
     <div class="card shadow mb-4">
-      <div class="card-header py-3">
+      <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Articles</h6>
+        <a type="button" href="index.php?action=createPost" class="btn btn-warning text-right">Ajouter un article</a>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -19,6 +20,7 @@
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Contenu du billet</th>
+                <th>Image</th>
                 <th>Date de création</th>
                 <th>Date de modification</th>
                 <th>Actions</th>
@@ -30,6 +32,7 @@
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Contenu du billet</th>
+                <th>Image</th>
                 <th>Date de création</th>
                 <th>Date de modification</th>
                 <th>Actions</th>
@@ -48,8 +51,14 @@
                     <td>{{ data['title'] | striptags | raw }}</td>
                     <td>{{ data['author'] | striptags | raw }}</td>
                     <td>{{ data['content'] | striptags | raw }}</td>
+                    <td>
+                      {% if data['image_post'] is empty %}
+                        <p>Pas d'image</p>
+                      {% else %}
+                        <img src="images/backend/{{ data['image_post'] | striptags | raw }}" width="100px"/></td>
+                    {% endif %}
                     <td>{{ data['formatted_date'] | striptags | raw }}</td>
-                    <td>{{ data['last_modification_format'] | striptags | raw  }}</td>
+                    <td>{{ data['formatted_date_modif'] | striptags | raw  }}</td>
                     <td>
                       <a href="index.php?action=editPost&amp;id={{ data['id'] }}>" class="edit" title="Modifier">
                         <i class="material-icons"></i>
@@ -68,22 +77,23 @@
           <div class="hint-text">Affichage de
             <b>{{ number0fElements }}</b>
             entrées sur
-            <b>{{ number_total_comments }}</b>
+            <b>{{ number_total_posts }}</b>
           </div>
           <ul class="pagination">
             <li class="page-item">
               {% if page > 1 %}
-                <a href="index.php?action=commentsList&amp;page={{ page - 1 }}" class="page-link">&laquo;</a>
+                <a href="index.php?action=adminListPosts&amp;page={{ page - 1 }}" class="page-link">&laquo; Précédent</a>
               {% endif %}
             </li>
+
             {% for key in 1..number_of_pages %}
               <li class="page-item">
-                <a href="index.php?action=commentsList&amp;page={{ key }}" class="page-link">{{ key }}</a>
+                <a href="index.php?action=adminListPosts&amp;page={{ key }}" class="page-link">{{ key }}</a>
               </li>
             {% endfor %}
             <li class="page-item">
               {% if page < number_of_pages %}
-                <a href="index.php?action=commentsList&amp;page={{ page + 1 }}" class="page-link">&raquo;</a>
+                <a href="index.php?action=adminListPosts&amp;page={{ page + 1 }}" class="page-link">Suivant &raquo;</a>
               {% endif %}
             </li>
           </ul>

@@ -2,11 +2,13 @@
 
 {% block content %}
   <div class="container">
-    <h3>Le billet
-      <strong>{{ idPost }}</strong>
-      a bien été modifié.</h3>
-    <a class="nav-link" href="index.php?action=adminListPosts">
-      Retour à la liste des billets
-    </a>
+    <div class="d-flex justify-content-center">
+      <h3 >Le billet
+        <strong>{{ idPost }}</strong>
+        a bien été modifié.</h3>
+      <a class="nav-link" href="index.php?action=adminListPosts">
+        Retour à la liste des billets
+      </a>
+    </div>
   </div>
 {% endblock %}

@@ -1,42 +1,42 @@
 {% block popupLogin %}
-	<div id="popupLogin" class="modal">
-		<form class="modal-content animate" action="index.php?action=loginCnx" method="post">
-			<div class="imgcontainer">
-				<span onclick="document.getElementById('popupLogin').style.display='none'" class="close" title="Close Modal">&times;</span>
-				<i class="fa fa-user-circle"></i>
-			</div>
+  <div id="popupLogin" class="modal">
+    <form class="modal-content animate" action="index.php?action=loginCnx" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('popupLogin').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <i class="fa fa-user-circle"></i>
+      </div>
 
-			<div class="container">
-				<label for="inputLogin">
-					<b>Utilisateur</b>
-				</label>
-				<input type="text" placeholder="Saisissez votre login" name="inputLogin" required>
+      <div class="container">
+        <label for="inputLogin">
+          <b>Utilisateur</b>
+        </label>
+        <input id="inputLogin" type="text" placeholder="Saisissez votre login" name="inputLogin" required="required">
 
-				<label for="inputPassword">
-					<b>Mot de passe</b>
-				</label>
-				<input type="password" placeholder="Saisissez votre mot de passe" name="inputPassword" required>
+        <label for="inputPassword">
+          <b>Mot de passe</b>
+        </label>
+        <input id="inputPassword" type="password" placeholder="Saisissez votre mot de passe" name="inputPassword" required="required">
 
-				<button type="submit">Connexion</button>
-			</div>
+        <button type="submit">Connexion</button>
+      </div>
 
-			<div class="container" style="background-color:#f1f1f1">
-				<button type="button" onclick="document.getElementById('popupLogin').style.display='none'" class="cancelbtn">Annuler</button>
-			</div>
-		</form>
-	</div>
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('popupLogin').style.display='none'" class="cancelbtn">Annuler</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}
 
 {% block footer %}
-	<script>
-		// Get the modal
-var modal = document.getElementById('popupLogin');
+  <script>
+    // Get the modal
+    var modal = document.getElementById('popupLogin');
 
-// When click anywhere outside of the modal, close it
-window.onclick = function (event) {
-if (event.target == modal) {
-modal.style.display = "none";
-}
-}
-	</script>
+    // When click anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 {% endblock %}

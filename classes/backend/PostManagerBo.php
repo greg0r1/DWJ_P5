@@ -2,8 +2,6 @@
 
 namespace App\backend;
 
-use Exception;
-
 class PostManagerBo extends ManagerBo
 {
     private $_target_file;
@@ -14,24 +12,35 @@ class PostManagerBo extends ManagerBo
         $this->_target_file = 'images/backend/' . basename($_FILES["submitFileToUpload"]["name"]);
     }
 
-    public function addNewPost()
+    public function addNewPost($title, $content, $author, $image_post, $image_caption)
     {
         $db = $this->dbConnect();
         $sql = "INSERT INTO `p5_oc_posts`(`title`, `content`, `author`, `creation_date`) VALUES (:title,:content,:author,NOW())";
         $newPost = $db->prepare($sql);
         $newPost->execute(array(
-            'title' => $_POST['tinymceTitle'],
-            'content' => $_POST['tinymceContent'],
-            'author' => $_SESSION['first_name']
+            'title' => $title,
+            'content' => $content,
+            'author' => $author,
         ));
+
+        $postId = (int) $db->query('SELECT MAX(id) FROM `p5_oc_posts`')->fetch(\PDO::FETCH_NUM)[0];
+
+        $newImage = $db->prepare('INSERT INTO `p5_oc_posts_images`(`post_id`, `image_post`, `image_caption`) VALUES (:post_id, :image_post, :image_caption)');
+        $newImage->execute(array(
+            'post_id' => $postId,
+            'image_post' => $image_post,
+            'image_caption' => $image_caption
+        ));
+
         $newPost->closeCursor();
+        $newImage->closeCursor();
     }
 
     public function getPostsCRUD($limit, $start)
     {
         $db = $this->dbConnect();
 
-        $sql_posts = ("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS formatted_date, DATE_FORMAT(last_modification, '%d/%m/%Y à %Hh%i') AS last_modification_format FROM p5_oc_posts  ORDER BY creation_date DESC LIMIT :limit OFFSET :start");
+        $sql_posts = ("SELECT `p5_oc_posts`.`id` ,`p5_oc_posts`.`title`, `p5_oc_posts`.`content`, `p5_oc_posts`.`author`, `p5_oc_posts`.`creation_date`, DATE_FORMAT(`last_modification`, '%d/%m/%Y à %Hh%i') AS formatted_date_modif, `p5_oc_posts_images`.`image_post`, `p5_oc_posts_images`.`image_caption`, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%i') AS formatted_date FROM `p5_oc_posts` LEFT JOIN `p5_oc_posts_images` ON `p5_oc_posts_images`.`post_id` = `p5_oc_posts`.`id` ORDER BY creation_date DESC LIMIT :limit OFFSET :start");
         $request_posts = $db->prepare($sql_posts) or die(print_r($db->errorInfo()));
         $request_posts->bindValue('limit', $limit, \PDO::PARAM_INT);
 
@@ -70,7 +79,7 @@ class PostManagerBo extends ManagerBo
         $request_post->closeCursor();
     }
 
-    public function updatingPost($idPost, $title, $content)
+    public function updatingPost($idPost, $title, $content, $image_post, $image_caption)
     {
         $db = $this->dbConnect();
         $request_post = $db->prepare("UPDATE `p5_oc_posts` SET `title`= :title,`content`= :content, `last_modification`= NOW() WHERE id = :idPost");
@@ -79,6 +88,15 @@ class PostManagerBo extends ManagerBo
             'content' => $content,
             'idPost' => $idPost
         ));
+
+        $request_post = $db->prepare("UPDATE `p5_oc_posts_images` SET `image_post`= :image_post,`image_caption`= :image_caption WHERE `post_id` = :idPost");
+        $request_post->execute(array(
+            'idPost' => $idPost,
+            'image_post' => $image_post,
+            'image_caption' => $image_caption
+        ));
+
+
         if ($request_post == false) {
             throw new \Exception("Erreur: Le billet n'a pas été modifié.", 1);
         }
@@ -109,20 +127,6 @@ class PostManagerBo extends ManagerBo
 
                 if (in_array($extension_upload, $extensions_allowed)) {
                     move_uploaded_file($_FILES['submitFileToUpload']['tmp_name'], $this->_target_file);
-                    //Add to database
-                    $db = $this->dbConnect();
-                    //sql postId
-                    $postId = (int) $db->query('SELECT MAX(id) FROM `p5_oc_posts`')->fetch(\PDO::FETCH_NUM)[0];
-                    $imageCaption = strip_tags($_POST['imageCaption']);
-                    $db = $this->dbConnect();
-                    $newImage = $db->prepare('INSERT INTO `p5_oc_posts_images`(`post_id`, `image_post`, `image_caption`) VALUES (:post_id, :imagePost, :imageCaption)');
-                    $newImage->execute(array(
-                        'post_id' => $postId,
-                        'imagePost' => strtolower(basename($_FILES["submitFileToUpload"]["name"])),
-                        'imageCaption' => $imageCaption
-                    ));
-                    return $this->message_Ok = 'Envoi de l\'image effectué';
-                    $newImage->closeCursor();
                 } else {
                     throw new \Exception('Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.');
                 }

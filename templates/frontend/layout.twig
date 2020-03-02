@@ -1,41 +1,41 @@
 {% block layout %}
-	<!DOCTYPE html>
-	<html lang="fr">
+  <!DOCTYPE html>
+  <html lang="fr">
 
-		<head>
-			{% block head %}
-				{% include('frontend/head.twig') %}
-				<title>
-					{% block title %}
-						{{title}}
-					{% endblock %}
-				</title>
-			{% endblock %}
-		</head>
+    <head>
+      {% block head %}
+        {% include('frontend/head.twig') %}
+        <title>
+          {% block title %}
+            {{title}}
+          {% endblock %}
+        </title>
+      {% endblock %}
+    </head>
 
-		<body>
-			<header>
-				{% include('frontend/header.twig') %}
-				{# Button To Top #}
-				<button onclick="topFunction()" id="btnTop" title="goToTop">
-					<p>&#10094;</p>
-				</button>
-			</header>
-			{% include('frontend/popupLogin.twig') %}
-			<nav>
-				{% include('frontend/nav.twig') %}
-			</nav>
-			{# Carousel only homePage #}
-			{% block carousel %}{% endblock %}
-			<main>
-				<div class="container">
-					{% block content %}{% endblock %}
-				</div>
-			</main>
-			{% block footer %}
-				{% include('frontend/footer.twig') %}
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-			{% endblock %}
-		</body>
-	</html>
+    <body>
+      <header>
+        {% include('frontend/header.twig') %}
+        {# Button To Top #}
+        <button onclick="topFunction()" id="btnTop" title="goToTop">
+          &#8743;
+        </button>
+      </header>
+      {% include('frontend/popupLogin.twig') %}
+      <nav>
+        {% include('frontend/nav.twig') %}
+      </nav>
+      {# Carousel only homePage #}
+      {% block carousel %}{% endblock %}
+      <main>
+        <div class="container">
+          {% block content %}{% endblock %}
+        </div>
+      </main>
+      {% block footer %}
+        {% include('frontend/footer.twig') %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+      {% endblock %}
+    </body>
+  </html>
 {% endblock %}
